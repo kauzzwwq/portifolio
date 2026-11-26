@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kauã Constantini Garcia | Portfólio</title>
+<meta name="description" content="Portfólio de Kauã Constantini Garcia: projetos com PHP, JavaScript, ESP32 e RFID. Videira, SC.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,800&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --azul:#123a5e; --azul-fundo:#0c2942; --papel:#eef3f6; --branco:#fff;
+  --tinta:#142433; --suave:#4d6273; --cobre:#f0a04b; --sinal:#62d99b; --linha:#c9d6df;
+  --titulo:'Bricolage Grotesque','Segoe UI',sans-serif;
+  --texto:'IBM Plex Sans','Segoe UI',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:var(--texto);background:var(--papel);color:var(--tinta);line-height:1.65}
+img{max-width:100%;display:block}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:3px solid var(--cobre);outline-offset:3px}
+.largura{width:min(1080px,100% - 40px);margin-inline:auto}
+h1,h2,h3{font-family:var(--titulo);line-height:1.1}
+h2{font-size:clamp(1.8rem,4vw,2.5rem);font-weight:800;margin-bottom:28px;color:var(--azul)}
+h3{font-size:1.35rem;font-weight:600}
+
+/* menu */
+.menu{position:sticky;top:0;z-index:10;background:var(--azul-fundo);color:var(--branco);border-bottom:1px solid #ffffff1f}
+.menu .largura{display:flex;justify-content:space-between;align-items:center;gap:20px;min-height:60px}
+.marca{font-family:var(--titulo);font-weight:800;text-decoration:none;font-size:1.15rem;white-space:nowrap}
+.menu ul{display:flex;gap:22px;list-style:none;overflow-x:auto;padding:6px 4px}
+.menu ul a{text-decoration:none;font-size:.95rem;white-space:nowrap}
+.menu ul a:hover{color:var(--cobre)}
+
+/* topo: grade de desenho técnico */
+.capa{color:var(--branco);padding:72px 0 84px;background-color:var(--azul);
+  background-image:linear-gradient(#ffffff12 1px,transparent 1px),linear-gradient(90deg,#ffffff12 1px,transparent 1px);
+  background-size:32px 32px}
+.capa .largura{display:grid;grid-template-columns:1.25fr 1fr;gap:56px;align-items:center}
+.capa h1{font-size:clamp(2.7rem,7vw,5rem);font-weight:800;letter-spacing:-.02em;margin-bottom:22px}
+.capa p{font-size:1.15rem;max-width:34em;color:#dbe8f2}
+.botoes{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.botao{display:inline-block;font:600 1rem var(--texto);padding:12px 22px;border-radius:6px;border:2px solid var(--cobre);text-decoration:none;cursor:pointer;background:var(--cobre);color:var(--tinta)}
+.botao:hover{filter:brightness(1.08)}
+.botao.vazado{background:transparent;color:var(--branco)}
+
+/* leitor de crachá */
+.leitor{background:var(--azul-fundo);border:1px solid #ffffff2e;border-radius:16px;padding:24px}
+.cracha{background:var(--branco);color:var(--tinta);border-radius:12px;padding:16px;display:flex;gap:16px;align-items:center;transition:transform .45s ease}
+.cracha.lendo{transform:translateY(16px) rotate(-2deg)}
+.foto{position:relative;width:84px;height:84px;border-radius:10px;flex:none;background:var(--azul);color:var(--branco);display:grid;place-items:center;font:800 1.7rem var(--titulo);overflow:hidden}
+.foto img{width:100%;height:100%;object-fit:cover}
+.cracha strong{display:block;font:600 1.2rem var(--titulo)}
+.cracha span{font-size:.92rem;color:var(--suave)}
+.tela{margin:30px 0 16px;background:#06180f;color:var(--sinal);border-radius:8px;padding:14px 16px;min-height:132px;font:500 .9rem/1.7 ui-monospace,Consolas,monospace;white-space:pre-wrap}
+.leitor .botao{width:100%}
+.leitor small{display:block;margin-top:10px;color:#a9c0d2;text-align:center}
+
+section{padding:70px 0}
+.sobre .largura{display:grid;grid-template-columns:1fr 1.6fr;gap:40px}
+.sobre p{max-width:38em;margin-bottom:14px;font-size:1.08rem}
+
+/* projetos */
+.projetos{background:var(--branco)}
+.destaque{border:2px solid var(--azul);border-radius:16px;padding:32px;margin-bottom:24px}
+.destaque h3{font-size:2rem;margin-bottom:8px}
+.destaque>p{max-width:42em}
+.fluxo{list-style:none;display:grid;grid-template-columns:repeat(5,1fr);gap:26px;margin:28px 0;counter-reset:p}
+.fluxo li{position:relative;background:var(--papel);border-radius:8px;padding:14px;font-size:.92rem;line-height:1.45}
+.fluxo b{display:block;color:var(--azul);font-size:1rem}
+.fluxo li:not(:last-child)::after{content:"";position:absolute;left:100%;top:50%;width:26px;height:3px;background:var(--cobre)}
+.tags{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin-top:16px}
+.tags li{border:1px solid var(--linha);border-radius:99px;padding:3px 12px;font-size:.88rem}
+.dupla{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.projeto{background:var(--papel);border-radius:16px;padding:28px;display:flex;flex-direction:column;gap:12px}
+.links{display:flex;flex-wrap:wrap;gap:18px;margin-top:auto;padding-top:8px}
+.links a{font-weight:600;color:var(--azul);text-underline-offset:4px;text-decoration-color:var(--cobre);text-decoration-thickness:2px}
+
+/* conhecimentos */
+.niveis{display:grid;grid-template-columns:repeat(2,1fr);gap:0 48px}
+.niveis div{border-top:2px solid var(--linha);padding:18px 0 24px}
+.niveis p{color:var(--suave)}
+.niveis .principal{border-color:var(--cobre)}
+
+/* trajetória */
+.trajetoria{background:var(--branco)}
+.linha-tempo{list-style:none;border-left:3px solid var(--linha);margin-left:7px}
+.linha-tempo li{position:relative;padding:0 0 30px 30px}
+.linha-tempo li::before{content:"";position:absolute;left:-9px;top:6px;width:15px;height:15px;border-radius:50%;background:var(--cobre);border:3px solid var(--branco)}
+.linha-tempo time{font-size:.92rem;color:var(--suave)}
+.linha-tempo p{max-width:42em}
+
+.contato{background:var(--azul-fundo);color:var(--branco)}
+.contato h2{color:var(--branco);margin-bottom:12px}
+.contato p{color:#dbe8f2}
+footer{background:var(--azul-fundo);color:#a9c0d2;border-top:1px solid #ffffff1f;padding:18px 0;font-size:.9rem}
+
+@media (max-width:820px){
+  .capa{padding:48px 0 56px}
+  .capa .largura,.sobre .largura,.dupla,.niveis{grid-template-columns:1fr}
+  .sobre .largura{gap:0}
+  .fluxo{grid-template-columns:1fr;gap:18px}
+  .fluxo li:not(:last-child)::after{left:24px;top:100%;width:3px;height:18px}
+  .destaque{padding:22px}
+  section{padding:50px 0}
+  .marca{display:none}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}.cracha{transition:none}}
+
+/* ===== visual v2 ===== */
+:root{--azul-fundo:#061424;--azul:#0e3358;--ciano:#35d6ff;--cobre:#ffb02e;--sinal:#4ee59a}
+.progresso-pagina{position:absolute;left:0;bottom:-1px;height:3px;width:100%;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,var(--ciano),var(--cobre))}
+.menu{background:#061424}
+.menu ul a{padding:4px 0;border-bottom:2px solid transparent}
+.menu ul a[aria-current]{color:var(--ciano);border-color:var(--ciano)}
+
+.capa{position:relative;overflow:hidden;min-height:calc(100svh - 60px);display:flex;align-items:center;padding:56px 0 72px;
+  background:radial-gradient(ellipse at 78% 35%,#135a8c 0,transparent 55%),var(--azul-fundo)}
+#circuito{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.capa .largura{position:relative}
+.capa h1{font-size:clamp(3rem,8vw,6rem);line-height:.98;background:linear-gradient(170deg,#fff 35%,var(--ciano));-webkit-background-clip:text;background-clip:text;color:transparent;padding-bottom:.08em}
+.capa p{font-size:1.22rem}
+.botao{border-radius:10px;transition:transform .2s,box-shadow .2s,filter .2s}
+.botao:hover{transform:translateY(-3px);box-shadow:0 10px 28px #ffb02e55}
+.botao.vazado{border-color:var(--ciano)}
+.botao.vazado:hover{box-shadow:0 10px 28px #35d6ff40}
+.botao:disabled{opacity:.7;cursor:wait;transform:none}
+
+.leitor{background:#0a2139d9;border-color:#35d6ff55;box-shadow:0 30px 80px #0009,0 0 60px #35d6ff1f;justify-self:center;width:100%;max-width:400px;padding-top:0}
+.cordao{width:34px;height:46px;margin:0 auto;background:repeating-linear-gradient(135deg,var(--ciano) 0 8px,#1b8fbd 8px 16px)}
+.cracha{flex-direction:column;text-align:center;gap:10px;position:relative;padding:30px 18px 20px;transform:perspective(800px) rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .2s;box-shadow:0 16px 40px #0007}
+.cracha::before{content:"";position:absolute;top:10px;width:54px;height:8px;border-radius:9px;background:#b9c8d4}
+.cracha.lendo{transform:translateY(14px) scale(.96)}
+.cracha .foto{width:124px;height:124px;border-radius:50%;font-size:2.4rem;border:4px solid var(--ciano)}
+.cracha strong{font-size:1.5rem}
+.chip{position:absolute;right:16px;top:28px;width:34px;height:27px;border-radius:6px;background:repeating-linear-gradient(90deg,transparent 0 10px,#9a6a12 10px 11px),repeating-linear-gradient(0deg,#f4c45c 0 8px,#9a6a12 8px 9px)}
+.status{display:flex;align-items:center;gap:9px;margin:26px 0 8px;font-size:.92rem;color:#cfe0ee}
+.led{width:12px;height:12px;border-radius:50%;background:#ff5d5d;box-shadow:0 0 12px #ff5d5d}
+.leitor[data-estado=lendo] .led{background:var(--cobre);box-shadow:0 0 14px var(--cobre)}
+.leitor[data-estado=ok] .led{background:var(--sinal);box-shadow:0 0 16px var(--sinal)}
+.leitor[data-estado=ok]{border-color:var(--sinal)}
+.tela{margin:0 0 14px;min-height:128px}
+
+.faixa{overflow:hidden;background:var(--cobre);color:var(--tinta);padding:14px 0;font:800 1.25rem var(--titulo)}
+.faixa ul{display:flex;width:max-content;list-style:none;animation:rolar 28s linear infinite}
+.faixa li{padding:0 28px;white-space:nowrap}
+.faixa:hover ul{animation-play-state:paused}
+@keyframes rolar{to{transform:translateX(-50%)}}
+
+h2{font-size:clamp(2.2rem,5vw,3.4rem);letter-spacing:-.02em}
+.destaque{border:0;color:var(--branco);padding:42px;background:radial-gradient(circle at 90% 0,#135a8c,transparent 55%),var(--azul-fundo);box-shadow:0 24px 60px #06142440}
+.destaque h3{font-size:clamp(2.4rem,6vw,3.6rem);color:var(--ciano)}
+.destaque>p{color:#dbe8f2;font-size:1.08rem}
+.fluxo li{background:#ffffff0f;border:1px solid #ffffff26;transition:transform .35s,background .35s,border-color .35s,box-shadow .35s}
+.fluxo b{color:var(--branco);font-size:1.15rem}
+.fluxo li.ativo{background:#35d6ff24;border-color:var(--ciano);box-shadow:0 0 28px #35d6ff55;transform:translateY(-8px)}
+.fluxo li:not(:last-child)::after{background:#ffffff33}
+.fluxo li.ativo::after{background:var(--ciano)}
+.destaque .tags li{border-color:#35d6ff66}
+.projeto{padding:0;overflow:hidden;border:1px solid var(--linha);transition:transform .25s,box-shadow .25s}
+.projeto:hover{transform:translateY(-8px);box-shadow:0 22px 44px #06142426}
+.projeto svg{width:100%;height:auto;display:block;background:var(--azul)}
+.projeto h3{font-size:1.8rem;padding:10px 28px 0}
+.projeto p{padding:0 28px}
+.projeto .links{padding:8px 28px 28px}
+.carga{animation:icar 4s ease-in-out infinite alternate}
+.cabo{animation:cabo 4s ease-in-out infinite alternate;transform-origin:0 42px}
+@keyframes icar{to{transform:translateY(-48px)}}
+@keyframes cabo{to{transform:scaleY(.4)}}
+
+.niveis{gap:22px}
+.niveis div{background:var(--branco);border:0;border-top:5px solid var(--azul);border-radius:14px;padding:26px;box-shadow:0 8px 24px #06142414;transition:transform .25s,box-shadow .25s}
+.niveis .principal{border-color:var(--cobre)}
+.niveis div:hover{transform:translateY(-6px);box-shadow:0 18px 36px #06142424}
+.niveis h3{margin-bottom:6px}
+.niveis p{font-size:1.1rem}
+.linha-tempo{border-image:linear-gradient(var(--ciano),var(--cobre)) 1}
+.linha-tempo li::before{transition:transform .2s,background .2s}
+.linha-tempo li:hover::before{transform:scale(1.5);background:var(--ciano)}
+
+.contato{text-align:center;padding:96px 0;background:radial-gradient(ellipse at 50% 110%,#135a8c,transparent 65%),var(--azul-fundo)}
+.contato .botoes{justify-content:center}
+
+@media (max-width:820px){
+  .capa{min-height:0}
+  .capa .largura{grid-template-columns:1fr}
+  .destaque{padding:26px}
+  .fluxo li.ativo{transform:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .faixa ul{animation:none;flex-wrap:wrap;width:auto;justify-content:center}
+  .faixa li[aria-hidden]{display:none}
+  .carga,.cabo{animation:none}
+  .botao,.projeto,.niveis div,.fluxo li{transition:none}
+}
+</style>
+</head>
+<body>
+
+<nav class="menu" aria-label="Menu principal">
+  <div class="largura">
+    <a class="marca" href="#inicio">Kauã Constantini</a>
+    <ul>
+      <li><a href="#sobre">Sobre</a></li>
+      <li><a href="#projetos">Projetos</a></li>
+      <li><a href="#conhecimentos">Conhecimentos</a></li>
+      <li><a href="#trajetoria">Trajetória</a></li>
+      <li><a href="#contato">Contato</a></li>
+    </ul>
+  </div>
+  <div class="progresso-pagina" id="progresso" aria-hidden="true"></div>
+</nav>
+
+<header class="capa" id="inicio">
+  <canvas id="circuito" aria-hidden="true"></canvas>
+  <div class="largura">
+    <div>
+      <h1>Kauã Constantini Garcia</h1>
+      <p>Estudante de Desenvolvimento de Sistemas no SENAI. Crio aplicações web com PHP e JavaScript e gosto de projetos com Arduino IDE, C++ e ESP32.</p>
+      <div class="botoes">
+        <a class="botao" href="#projetos">Ver meus projetos</a>
+        <a class="botao vazado" href="https://github.com/kauzzwwq" target="_blank" rel="noopener">Abrir meu GitHub</a>
+      </div>
+    </div>
+
+    <div class="leitor" id="leitor">
+      <div class="cordao" aria-hidden="true"></div>
+      <div class="cracha" id="cracha">
+        <span class="chip" aria-hidden="true"></span>
+        <div class="foto" aria-hidden="true">KC<img src="eu.png" alt="" onerror="this.remove()" style="position:absolute;inset:0"></div>
+        <div>
+          <strong>Kauã C. Garcia</strong>
+          <span>17 anos, Videira (SC)<br>Aprendiz Industrial</span>
+        </div>
+      </div>
+      <div class="status"><i class="led" aria-hidden="true"></i><span id="estado">Aguardando crachá</span></div>
+      <div class="tela" id="tela" aria-live="polite">Leitor pronto.
+Aproxime o crachá.</div>
+      <button class="botao" id="ler" type="button">Aproximar crachá</button>
+      <small>Simulação ilustrativa inspirada no meu projeto GTATech.</small>
+    </div>
+  </div>
+</header>
+
+<div class="faixa" aria-label="Tecnologias"><ul><li>PHP</li><li>JavaScript</li><li>C++</li><li>ESP32</li><li>RFID</li><li>MySQL</li><li>Python</li><li>HTML5</li><li>CSS3</li><li>Arduino IDE</li><li>SolidWorks</li><li>AutoCAD</li><li>Git</li><li aria-hidden="true">PHP</li><li aria-hidden="true">JavaScript</li><li aria-hidden="true">C++</li><li aria-hidden="true">ESP32</li><li aria-hidden="true">RFID</li><li aria-hidden="true">MySQL</li><li aria-hidden="true">Python</li><li aria-hidden="true">HTML5</li><li aria-hidden="true">CSS3</li><li aria-hidden="true">Arduino IDE</li><li aria-hidden="true">SolidWorks</li><li aria-hidden="true">AutoCAD</li><li aria-hidden="true">Git</li></ul></div>
+
+<main>
+<section class="sobre" id="sobre">
+  <div class="largura">
+    <h2>Sobre mim</h2>
+    <div>
+      <p>Sou aprendiz industrial do SENAI e meu sonho é entrar para o mundo da programação. Vou sempre me esforçar e me dedicar para alcançar esse objetivo.</p>
+      <p>Aprendo rápido, tenho interesse em evoluir e busco uma oportunidade como jovem aprendiz ou estagiário em desenvolvimento de sistemas.</p>
+    </div>
+  </div>
+</section>
+
+<section class="projetos" id="projetos">
+  <div class="largura">
+    <h2>Projetos</h2>
+
+    <article class="destaque">
+      <h3>GTATech</h3>
+      <p>Solução para validar a Guia de Trânsito Animal (GTA) em portarias usando o crachá do motorista. Desenvolvi a ideia, a solução e grande parte do aplicativo. Projeto Mundo SENAI.</p>
+      <ol class="fluxo" id="fluxo" aria-label="Como o GTATech funciona">
+        <li><b>Crachá</b>O motorista aproxima o crachá RFID/NFC.</li>
+        <li><b>ESP32</b>Lê o código e envia por Wi-Fi.</li>
+        <li><b>Servidor</b>PHP no Raspberry Pi recebe a leitura.</li>
+        <li><b>Banco</b>MySQL consulta a GTA e registra o acesso.</li>
+        <li><b>Portaria</b>O painel mostra o resultado.</li>
+      </ol>
+      <ul class="tags" aria-label="Tecnologias">
+        <li>C++</li><li>Arduino IDE</li><li>ESP32</li><li>MFRC522</li><li>Display LCD</li><li>Raspberry Pi</li><li>Linux</li><li>Apache</li><li>PHP</li><li>MySQL</li><li>HTML</li><li>CSS</li><li>JavaScript</li>
+      </ul>
+    </article>
+
+    <div class="dupla">
+      <article class="projeto">
+        <svg viewBox="0 0 400 180" role="img" aria-label="Ilustração de um guindaste içando uma carga em um navio">
+          <path d="M30 150V30h190v10H44v110z" fill="#ffb02e"/><path d="M44 80L90 40h14L44 94z" fill="#ffb02e"/>
+          <rect class="cabo" x="189" y="42" width="3" height="76" fill="#fff"/>
+          <g class="carga"><rect x="160" y="116" width="62" height="28" rx="3" fill="#35d6ff"/><path d="M172 116v28M185 116v28M198 116v28M210 116v28" stroke="#0e3358" stroke-width="3"/></g>
+          <path d="M120 148h250l-26 24H146z" fill="#dbe8f2"/><rect x="312" y="112" width="36" height="36" fill="#dbe8f2"/>
+          <path d="M0 168q25-9 50 0t50 0t50 0t50 0t50 0t50 0t50 0t50 0V180H0z" fill="#1b8fbd"/>
+        </svg>
+        <h3>Port Control</h3>
+        <p>Protótipo criado em equipe no GRANPIX SENAI 2026 para facilitar e automatizar o içamento de cargas em navios cargueiros da Petrobras.</p>
+        <div class="links">
+          <a href="https://port-control-deck.lovable.app/" target="_blank" rel="noopener">Abrir protótipo</a>
+          <a href="https://github.com/kauzzwwq/granpix-SENAI2026" target="_blank" rel="noopener">Ver no GitHub</a>
+        </div>
+      </article>
+      <article class="projeto">
+        <svg viewBox="0 0 400 180" role="img" aria-label="Diagrama da arquitetura MVC">
+          <path d="M115 62H285M80 85L175 135M320 85L225 135" stroke="#ffb02e" stroke-width="3" stroke-dasharray="7 6" fill="none"/>
+          <g fill="#061424" stroke="#35d6ff" stroke-width="2"><rect x="25" y="38" width="110" height="48" rx="10"/><rect x="265" y="38" width="110" height="48" rx="10"/><rect x="140" y="114" width="120" height="48" rx="10"/></g>
+          <g fill="#fff" font-size="16" font-weight="600" text-anchor="middle"><text x="80" y="68">Model</text><text x="320" y="68">View</text><text x="200" y="144">Controller</text></g>
+        </svg>
+        <h3>Sistemas web</h3>
+        <p>Aplicações com PHP, JavaScript e MySQL em arquitetura MVC, com cadastros, autenticação, consultas e operações em banco de dados.</p>
+        <div class="links">
+          <a href="https://github.com/kauzzwwq/Pessoal" target="_blank" rel="noopener">Ver projetos no GitHub</a>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section id="conhecimentos">
+  <div class="largura">
+    <h2>Conhecimentos</h2>
+    <div class="niveis">
+      <div class="principal"><h3>Onde tenho mais domínio</h3><p>PHP e JavaScript.</p></div>
+      <div class="principal"><h3>Projetos com hardware</h3><p>C++ no Arduino IDE, ESP32 e RFID.</p></div>
+      <div><h3>Também trabalho com</h3><p>HTML, CSS, Python, C, SQL, MySQL, MVC, Git e GitHub.</p></div>
+      <div><h3>Desenho técnico</h3><p>SolidWorks e AutoCAD.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="trajetoria" id="trajetoria">
+  <div class="largura">
+    <h2>Trajetória</h2>
+    <ol class="linha-tempo">
+      <li><time>03/2026 a 08/2027 (cursando)</time><h3>Técnico em Desenvolvimento de Sistemas</h3><p>SENAI</p></li>
+      <li><time>02/2026 a 12/2026 (cursando)</time><h3>Aprendizagem Industrial: Programador de Sistemas</h3><p>SENAI, Assistente em Programador de Sistemas da Informação.</p></li>
+      <li><time>01/2025 a 12/2025</time><h3>Aprendiz de Projetos na Manutenção</h3><p>Videplast. Elaborei desenhos técnicos em SolidWorks e AutoCAD, encaminhados para execução dentro da empresa.</p></li>
+      <li><time>02/2025 a 12/2025</time><h3>Aprendizagem Industrial: Metalmecânica</h3><p>Assistente em Processos de Apoio da Indústria Metalmecânica.</p></li>
+      <li><time>2026 (cursando)</time><h3>Ensino Médio, 2ª série</h3><p>EEB Prof. Adelina Régis</p></li>
+    </ol>
+  </div>
+</section>
+
+<section class="contato" id="contato">
+  <div class="largura">
+    <h2>Vamos conversar?</h2>
+    <p>Estou disponível para conhecer oportunidades e aprender mais.</p>
+    <div class="botoes">
+      <a class="botao" href="mailto:kauaconstantini0906@gmail.com">Enviar e-mail</a>
+      <button class="botao vazado" id="copiar" type="button">Copiar e-mail</button>
+      <a class="botao vazado" href="https://wa.me/5549999695059" target="_blank" rel="noopener">Chamar no WhatsApp</a>
+      <a class="botao vazado" href="https://github.com/kauzzwwq" target="_blank" rel="noopener">Abrir meu GitHub</a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="largura">&copy; 2026 Kauã Constantini Garcia</div></footer>
+
+<script>
+const $ = id => document.getElementById(id);
+const calmo = matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+// leitor de crachá
+const botao = $("ler"), tela = $("tela"), cracha = $("cracha"), leitor = $("leitor"), estado = $("estado");
+const passos = ["Lendo crachá...", "ESP32: enviando por HTTP POST", "Servidor: consultando o cadastro", "Acesso liberado. Conheça meus projetos!"];
+botao.addEventListener("click", () => {
+  botao.disabled = true;
+  cracha.classList.add("lendo");
+  leitor.dataset.estado = "lendo";
+  estado.textContent = "Lendo";
+  tela.textContent = "";
+  passos.forEach((texto, i) => setTimeout(() => {
+    tela.textContent += (i ? "\n" : "") + texto;
+    if (i === passos.length - 1) {
+      cracha.classList.remove("lendo");
+      leitor.dataset.estado = "ok";
+      estado.textContent = "Acesso liberado";
+      botao.disabled = false;
+      botao.textContent = "Ler novamente";
+    }
+  }, i * 600));
+});
+
+// crachá acompanha o mouse
+if (!calmo) {
+  leitor.addEventListener("pointermove", e => {
+    const r = leitor.getBoundingClientRect();
+    cracha.style.setProperty("--ry", ((e.clientX - r.left) / r.width - .5) * 18 + "deg");
+    cracha.style.setProperty("--rx", (.5 - (e.clientY - r.top) / r.height) * 12 + "deg");
+  });
+  leitor.addEventListener("pointerleave", () => cracha.removeAttribute("style"));
+}
+
+// etapas do GTATech acendem em sequência
+const etapas = [...$("fluxo").children];
+let atual = 0;
+if (!calmo) {
+  etapas[0].classList.add("ativo");
+  setInterval(() => {
+    etapas[atual].classList.remove("ativo");
+    atual = (atual + 1) % etapas.length;
+    etapas[atual].classList.add("ativo");
+  }, 1300);
+}
+
+// barra de progresso e item do menu ativo
+const links = [...document.querySelectorAll(".menu ul a")];
+function rolagem() {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  $("progresso").style.transform = "scaleX(" + (max > 0 ? scrollY / max : 0) + ")";
+  let ativo = null;
+  links.forEach(a => { if (document.querySelector(a.hash).getBoundingClientRect().top < innerHeight * .4) ativo = a; });
+  if (max > 0 && scrollY >= max - 2) ativo = links[links.length - 1];
+  links.forEach(a => a === ativo ? a.setAttribute("aria-current", "true") : a.removeAttribute("aria-current"));
+}
+addEventListener("scroll", rolagem, { passive: true });
+rolagem();
+
+// copiar e-mail
+$("copiar").addEventListener("click", async e => {
+  const email = "kauaconstantini0906@gmail.com";
+  try { await navigator.clipboard.writeText(email); e.target.textContent = "E-mail copiado"; }
+  catch { e.target.textContent = email; }
+});
+
+// trilhas de circuito animadas no topo
+const tela2 = $("circuito"), g = tela2.getContext("2d");
+let trilhas = [], visivel = true;
+function montar() {
+  const w = tela2.clientWidth, h = tela2.clientHeight, d = devicePixelRatio || 1;
+  tela2.width = w * d; tela2.height = h * d; g.setTransform(d, 0, 0, d, 0, 0);
+  trilhas = Array.from({ length: Math.ceil(w / 90) }, (_, i) => {
+    const x = i * 90 + 20, y = Math.random() * h * .7, a = 50 + Math.random() * 120, lado = Math.random() < .5 ? -45 : 45;
+    const pts = [[x, y], [x, y + a], [x + lado, y + a + 45], [x + lado, y + a + 90 + Math.random() * 160]];
+    return { pts, fase: Math.random(), vel: .00008 + Math.random() * .00012 };
+  });
+  if (calmo) desenhar(0);
+}
+function ponto(pts, t) {
+  const tam = pts.slice(1).map((p, i) => Math.hypot(p[0] - pts[i][0], p[1] - pts[i][1]));
+  let resto = t * tam.reduce((a, b) => a + b, 0), i = 0;
+  while (i < tam.length - 1 && resto > tam[i]) resto -= tam[i++];
+  const k = resto / tam[i];
+  return [pts[i][0] + (pts[i + 1][0] - pts[i][0]) * k, pts[i][1] + (pts[i + 1][1] - pts[i][1]) * k];
+}
+function desenhar(ms) {
+  g.clearRect(0, 0, tela2.clientWidth, tela2.clientHeight);
+  trilhas.forEach(t => {
+    g.strokeStyle = "rgba(53,214,255,.17)"; g.lineWidth = 1.5; g.beginPath();
+    t.pts.forEach((p, i) => i ? g.lineTo(...p) : g.moveTo(...p)); g.stroke();
+    [t.pts[0], t.pts[3]].forEach(p => { g.beginPath(); g.arc(p[0], p[1], 4, 0, 7); g.stroke(); });
+    if (!calmo) {
+      const [x, y] = ponto(t.pts, (t.fase + ms * t.vel) % 1);
+      g.fillStyle = "#35d6ff"; g.shadowColor = "#35d6ff"; g.shadowBlur = 14;
+      g.beginPath(); g.arc(x, y, 2.8, 0, 7); g.fill(); g.shadowBlur = 0;
+    }
+  });
+}
+function animar(ms) { if (visivel) desenhar(ms); requestAnimationFrame(animar); }
+new IntersectionObserver(([e]) => visivel = e.isIntersecting).observe(tela2);
+new ResizeObserver(montar).observe(tela2);
+if (!calmo) requestAnimationFrame(animar);
+</script>
+</body>
+</html>
